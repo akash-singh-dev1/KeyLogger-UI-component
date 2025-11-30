@@ -7,24 +7,14 @@ function KeyLogger() {
   );
 
   //  Define the event handler function
-  const handleKeyDown = (event) => {
-    // 'event' is the synthetic event object
-    console.log("Key Pressed:", event.key);
-    console.log("Key Code:", event.keyCode);
+  const handleOnBeforeInput = (event) => {
+    //'event' is the synthetic event object
+    console.log("Key Pressed:", event.data);
 
     // Update the state to show the last key pressed
-    if (event.key === " ") {
-      setKeyPress(`LAST KEY PRESSED IS: " SPACEBAR " (Code: ${event.keyCode})`);
-    } else
-      setKeyPress(
-        `LAST KEY PRESSED IS: " ${event.key} " (Code: ${event.keyCode})`
-      );
-
-    // Example: Prevent default action for the spacebar
-    // if (event.key === " ") {
-    //   event.preventDefault();
-    //   console.log("Spacebar press prevented!");
-    // }
+    if (event.data === " ") {
+      setKeyPress(`LAST KEY PRESSED IS: " SPACEBAR " `);
+    } else setKeyPress(`LAST KEY PRESSED IS: " ${event.data} " `);
   };
 
   return (
@@ -36,7 +26,7 @@ function KeyLogger() {
         className="key-logger-input"
         type="text"
         placeholder="Type here..."
-        onKeyDown={handleKeyDown}
+        onBeforeInput={handleOnBeforeInput}
       />
 
       <p className="key-logger-result">{keyPress}</p>
